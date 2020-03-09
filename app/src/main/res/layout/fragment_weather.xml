@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.WeatherFragment">
+    tools:context=".ui.WeatherFragment"
+    android:background="@drawable/bg_line_gradient">
 
     <TextView
         android:id="@+id/city_title_tv"

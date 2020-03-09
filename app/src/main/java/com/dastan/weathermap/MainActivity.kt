@@ -10,44 +10,48 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.GoogleMap
-import com.dastan.weathermap.ui.MapFragment
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.dastan.weathermap.ui.city.CityFragment
+import com.dastan.weathermap.ui.map.MapFragment
+import com.dastan.weathermap.ui.map.MapViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     //    val fab: FloatingActionButton = findViewById(R.id.fab)
     private lateinit var popupWindow: PopupWindow
     private lateinit var viewPopUp: View
+    private val viewModel : MapViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupNavigationView()
         setSelectFragment(MapFragment())
         fab.setOnClickListener(View.OnClickListener {
-            popUpBuilder(R.layout.fragment_weather)
-            val close = viewPopUp.findViewById<ImageView>(R.id.ic_close)
-            close.setOnClickListener(View.OnClickListener {
-                popupWindow.dismiss()
-            })
+//            openDialog()
+//            popupWindow.showAtLocation(viewPopUp, Gravity.CENTER, 0, 0)
         })
+
+
+//        val close = viewPopUp.findViewById<ImageView>(R.id.ic_close)
+//        close.setOnClickListener(View.OnClickListener {
+//            popupWindow.dismiss()
+//        })
     }
 
-    private fun popUpBuilder(fragment: Int) {
-        val inflater: LayoutInflater =
-            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        viewPopUp = inflater.inflate(fragment, null)
-        popupWindow = PopupWindow(
-            viewPopUp,
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        popupWindow.animationStyle = R.style.popUp_animation
-        popupWindow.isFocusable = true
-        popupWindow.isOutsideTouchable = true
-        popupWindow.showAtLocation(viewPopUp, Gravity.CENTER, 0, 0)
-    }
+//    private fun popUpBuilder(layout: Int) {
+//        val inflater: LayoutInflater =
+//            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        viewPopUp = inflater.inflate(layout, null)
+//        popupWindow = PopupWindow(
+//            viewPopUp,
+//            LinearLayout.LayoutParams.WRAP_CONTENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        popupWindow.animationStyle = R.style.popUp_animation
+//        popupWindow.isFocusable = true
+//        popupWindow.isOutsideTouchable = true
+//    }
+
+
 
     private fun setupNavigationView() {
         navigationView.setOnNavigationItemSelectedListener {
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.n_city_search -> {
-                    setSelectFragment()
+                    setSelectFragment(CityFragment())
                     true
                 }
                 R.id.n_profile -> {
@@ -70,11 +74,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setSelectFragment(fr: Fragment? = null) {
-        fr?.let { supportFragmentManager.beginTransaction().add(R.id.mainFragment, it).commit() }
+        fr?.let { supportFragmentManager.beginTransaction().replace(R.id.mainFragment, it).commit() }
     }
 
     override fun onBackPressed() {
         if (popupWindow.isShowing) popupWindow.dismiss()
-        else super.onBackPressed()
+        super.onBackPressed()
     }
 }
