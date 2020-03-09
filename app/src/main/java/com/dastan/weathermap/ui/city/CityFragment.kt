@@ -27,25 +27,8 @@ class CityFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_city, container, false)
         search = view.findViewById(R.id.search_field)
 
-        timer = object : CountDownTimer(2000, 1000) {
-            override fun onFinish() {
-                if (search.text.isNotEmpty()) cViewModel.getCityInfo(search.text.toString())
-                updateRecycler()
-            }
-
-            override fun onTick(millisUntilFinished: Long) {
-                Toast.makeText(activity, millisUntilFinished.toString(), Toast.LENGTH_LONG).show()
-            }
-        }
         search()
         return view
-    }
-
-    private fun updateRecycler(){
-        cViewModel.liveData.observe(this, Observer {
-            rv_cities.adapter = adapter
-            if (!it.isNullOrEmpty())adapter.updateList(it)
-        })
     }
 
     private fun search(){

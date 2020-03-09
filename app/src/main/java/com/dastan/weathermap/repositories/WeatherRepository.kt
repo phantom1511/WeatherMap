@@ -28,7 +28,7 @@ class WeatherRepository {
                 }
 
                 override fun onFailure(call: Call<WeatherMainModel>, t: Throwable) {
-                    Log.e("ololo",call.request().url.toString())
+                    Log.e("ron",call.request().url.toString())
                     data.value = null
 
                 }

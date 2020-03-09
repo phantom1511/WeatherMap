@@ -26,30 +26,30 @@ class MainActivity : AppCompatActivity() {
         setupNavigationView()
         setSelectFragment(MapFragment())
         fab.setOnClickListener(View.OnClickListener {
-//            openDialog()
-//            popupWindow.showAtLocation(viewPopUp, Gravity.CENTER, 0, 0)
+            openDialog()
+            popupWindow.showAtLocation(viewPopUp, Gravity.CENTER, 0, 0)
         })
 
 
-//        val close = viewPopUp.findViewById<ImageView>(R.id.ic_close)
-//        close.setOnClickListener(View.OnClickListener {
-//            popupWindow.dismiss()
-//        })
+        val close = viewPopUp.findViewById<ImageView>(R.id.ic_close)
+        close.setOnClickListener(View.OnClickListener {
+            popupWindow.dismiss()
+        })
     }
 
-//    private fun popUpBuilder(layout: Int) {
-//        val inflater: LayoutInflater =
-//            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//        viewPopUp = inflater.inflate(layout, null)
-//        popupWindow = PopupWindow(
-//            viewPopUp,
-//            LinearLayout.LayoutParams.WRAP_CONTENT,
-//            LinearLayout.LayoutParams.WRAP_CONTENT
-//        )
-//        popupWindow.animationStyle = R.style.popUp_animation
-//        popupWindow.isFocusable = true
-//        popupWindow.isOutsideTouchable = true
-//    }
+    private fun popUpBuilder(layout: Int) {
+        val inflater: LayoutInflater =
+            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        viewPopUp = inflater.inflate(layout, null)
+        popupWindow = PopupWindow(
+            viewPopUp,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        popupWindow.animationStyle = R.style.popUp_animation
+        popupWindow.isFocusable = true
+        popupWindow.isOutsideTouchable = true
+    }
 
 
 
