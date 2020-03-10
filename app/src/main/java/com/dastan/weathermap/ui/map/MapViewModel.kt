@@ -1,5 +1,6 @@
 package com.dastan.weathermap.ui.map
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dastan.weathermap.model.weather.WeatherMainModel

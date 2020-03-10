@@ -13,20 +13,21 @@ import androidx.fragment.app.Fragment
 import com.dastan.weathermap.ui.city.CityFragment
 import com.dastan.weathermap.ui.map.MapFragment
 import com.dastan.weathermap.ui.map.MapViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.properties.ReadOnlyProperty
 
 class MainActivity : AppCompatActivity() {
-    //    val fab: FloatingActionButton = findViewById(R.id.fab)
+    //val fab : FloatingActionButton = findViewById(R.id.fab)
     private lateinit var popupWindow: PopupWindow
     private lateinit var viewPopUp: View
-    private val viewModel : MapViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupNavigationView()
         setSelectFragment(MapFragment())
+        popUpBuilder(R.layout.fragment_weather)
         fab.setOnClickListener(View.OnClickListener {
-            openDialog()
             popupWindow.showAtLocation(viewPopUp, Gravity.CENTER, 0, 0)
         })
 
