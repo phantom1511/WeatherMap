@@ -14,8 +14,22 @@ private const val BASE_URL = "https://restcountries.eu/"
 
 class CountryRepository {
     private lateinit var api: ApiService
-    fun getCitiesInfo(city: String): Observable<List<Countries>> {
+    fun getCitiesInfo(city: String): MutableLiveData<List<Countries>> {
         api = RetrofitClient.instateRetrofit(BASE_URL)!!
-        return api.getCityInfo(city)
+        val data = MutableLiveData<List<Countries>>()
+        api.getCityInfo(city).enqueue(object : Callback<List<Countries>>{
+            override fun onFailure(call: Call<List<Countries>>, t: Throwable) {
+                data.value = null
+            }
+
+            override fun onResponse(
+                call: Call<List<Countries>>,
+                response: Response<List<Countries>>
+            ) {
+                data.value = response.body()
+            }
+
+        })
+        return data
     }
 }

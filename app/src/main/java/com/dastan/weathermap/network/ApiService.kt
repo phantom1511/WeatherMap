@@ -15,5 +15,5 @@ interface ApiService {
                        @Query("appId") appId: String) : Call<WeatherMainModel>
 
     @GET("rest/v2/capital/{capital}")
-    fun getCityInfo(@Path("capital") capital: String) : Observable<List<Countries>>
+    fun getCityInfo(@Path("capital") capital: String) : Call<List<Countries>>
 }

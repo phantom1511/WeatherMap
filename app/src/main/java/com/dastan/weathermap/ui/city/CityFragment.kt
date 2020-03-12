@@ -33,6 +33,7 @@ class CityFragment : Fragment() {
         search = view.findViewById(R.id.search_field)
         timer = object : CountDownTimer(2000, 1000) {
             override fun onFinish() {
+                cViewModel.getCityInfo(search.text.toString())
                 updateRecycler()
             }
 
@@ -45,14 +46,17 @@ class CityFragment : Fragment() {
     }
 
     private fun updateRecycler() {
-        if (search.text.isNotEmpty()) cViewModel.getCityInfo(search.text.toString())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({ result ->
-                if (!result.isNullOrEmpty()) rv_cities.adapter = CityAdapter(result)
-            }, { error ->
-                error.printStackTrace()
-            })
+        cViewModel.cities.observe(this, Observer {
+            rv_cities.adapter = CityAdapter(it)
+        })
+//        if (search.text.isNotEmpty()) cViewModel.getCityInfo(search.text.toString())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeOn(Schedulers.io())
+//            .subscribe({ result ->
+//                if (!result.isNullOrEmpty()) rv_cities.adapter = CityAdapter(result)
+//            }, { error ->
+//                error.printStackTrace()
+//            })
     }
 
     private fun search() {

@@ -9,7 +9,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class CityViewModel(private  val cRepository:  CountryRepository) : ViewModel(){
-    fun getCityInfo(city: String) : Observable<List<Countries>>{
-        return cRepository.getCitiesInfo(city)
+    var cities : MutableLiveData<List<Countries>> = MutableLiveData()
+    fun getCityInfo(city: String){
+        cities = cRepository.getCitiesInfo(city)
     }
 }
